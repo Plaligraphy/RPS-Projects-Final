@@ -10,21 +10,58 @@ import (
 var ch int
 var aiCh int
 var aiChParse string
+var chParse string
 
 func main() {
 	cls()
 	var in string
+	var opt int
 	print("Rock Paper Scissors")
 	print("s. Start Game")
 	print("ex. Exit")
 	fmt.Scanln(&in)
 	switch in {
 	case "s":
-		gameStart()
+		print("One or two player?(1, 2): ")
+		fmt.Scanln(&opt)
+		switch opt {
+		case 1:
+			gameStart()
+		case 2:
+			twoPlayerGame()
+		}
+
 	case "ex":
 		os.Exit(0)
 	}
 }
+func twoPlayerGame() {
+	cls()
+	var p1 string
+	var p2 string
+	print("Player 1: Your selection?: (r, p, s)")
+	fmt.Scanln(&p1)
+	cls()
+	print("Player 2: Your selection?: (r, p, s)")
+	fmt.Scanln(&p2)
+	if (p1 == "r" && p2 == "p") || (p1 == "p" && p2 == "s") || (p1 == "s" && p2 == "r") {
+		print("You Lose!")
+	} else if p1 == p2 {
+		print("Tie!")
+	} else {
+		print("You Win!")
+	}
+	print("Play again? (y,n)")
+	var sn string
+	fmt.Scanln(&sn)
+	switch sn {
+	case "y":
+		gameStart()
+	case "n":
+		os.Exit(0)
+	}
+}
+
 func print(text string) {
 	fmt.Println(text)
 }
@@ -65,9 +102,10 @@ func logic() {
 	rand.Seed(time.Now().UnixNano())
 	var sn string
 	ai()
-	fmt.Println("AI Selected: ")
 	parseAi()
-	print(aiChParse)
+	parsePlayer()
+	fmt.Println("AI Selected: ", aiChParse)
+	fmt.Println("You Selected: ", chParse)
 	if (aiCh == 0 && ch == 2) || (aiCh == 1 && ch == 0) || (aiCh == 2 && ch == 1) {
 		print("You Lose!")
 	} else if aiCh == ch {
@@ -96,6 +134,16 @@ func parseAi() {
 		aiChParse = "Paper"
 	case 2:
 		aiChParse = "Scissors"
+	}
+}
+func parsePlayer() {
+	switch ch {
+	case 0:
+		chParse = "Rock"
+	case 1:
+		chParse = "Paper"
+	case 2:
+		chParse = "Scissors"
 	}
 }
 
