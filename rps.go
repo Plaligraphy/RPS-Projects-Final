@@ -22,7 +22,7 @@ func main() {
 	fmt.Scanln(&in)
 	switch in {
 	case "s":
-		print("One or two player?(1, 2): ")
+		print("One or two player? (1, 2): ")
 		fmt.Scanln(&opt)
 		switch opt {
 		case 1:
@@ -51,6 +51,7 @@ func twoPlayerGame() {
 	} else {
 		print("You Win!")
 	}
+	print("*****************")
 	print("Play again? (y,n)")
 	var sn string
 	fmt.Scanln(&sn)
@@ -113,6 +114,7 @@ func logic() {
 	} else {
 		print("You Win!")
 	}
+	print("*****************")
 	print("Play again? (y,n)")
 	fmt.Scanln(&sn)
 	switch sn {
